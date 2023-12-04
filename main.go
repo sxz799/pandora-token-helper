@@ -1,8 +1,8 @@
 package main
 
 import (
-	"gpt-token-helper/services"
 	"log"
+	"pandora-token-helper/services"
 )
 
 func RefreshTokenBySessionToken(baseUrl, sessionToken, uniqueName string) {
@@ -10,12 +10,12 @@ func RefreshTokenBySessionToken(baseUrl, sessionToken, uniqueName string) {
 	s.BaseUrl = baseUrl
 	accessToken, err := s.GetAccessTokenBySessionToken(sessionToken)
 	if err != nil {
-		log.Println(err.Error())
+		log.Fatal(err.Error())
 	}
 	log.Println(accessToken)
 	shareToken, err := s.RefreshShareToken(accessToken, uniqueName)
 	if err != nil {
-		log.Println(err.Error())
+		log.Fatal(err.Error())
 	}
 	log.Println(shareToken)
 }
@@ -25,16 +25,21 @@ func RefreshTokenByAccount(baseUrl, account, password, uniqueName string) {
 	s.BaseUrl = baseUrl
 	accessToken, err := s.GetAccessTokenByAccount(account, password)
 	if err != nil {
-		log.Println(err.Error())
+		log.Fatal(err.Error())
 	}
-	log.Println(accessToken)
+	log.Println("accessToken:", accessToken)
 	shareToken, err := s.RefreshShareToken(accessToken, uniqueName)
 	if err != nil {
-		log.Println(err.Error())
+		log.Fatal(err.Error())
 	}
-	log.Println(shareToken)
+	log.Println("shareToken,", shareToken)
 }
 
 func main() {
-	RefreshTokenByAccount("", "", "", "")
+	baseUrl := "https://dd.18.1/pr156456"
+	sessionToken := "eyJ"
+	uniqueName := "12587587"
+
+	RefreshTokenBySessionToken(baseUrl, sessionToken, uniqueName)
+	//RefreshTokenByAccount("", "", "", "")
 }

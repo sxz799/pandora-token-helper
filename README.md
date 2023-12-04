@@ -1,1 +1,1 @@
-# gpt-token-helper
+# pandora-token-helper

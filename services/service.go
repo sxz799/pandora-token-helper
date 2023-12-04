@@ -2,9 +2,9 @@ package services
 
 import (
 	"encoding/json"
-	"gpt-token-helper/utils"
 	"log"
 	"net/url"
+	"pandora-token-helper/utils"
 )
 
 type Service struct {
