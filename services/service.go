@@ -13,13 +13,13 @@ type Service struct {
 
 func (s *Service) GetAccessTokenBySessionToken(sessionToken string) (string, error) {
 
-	// 构建一个切片用于保存键值对的字符串
-	body := []byte("session_token=" + sessionToken)
+	values := url.Values{}
+	values.Add("session_token", sessionToken)
 	apiUrl := s.BaseUrl + "/auth/session"
 	headers := map[string]string{
 		"Content-Type": "application/x-www-form-urlencoded",
 	}
-	request, err := utils.SendRequest("POST", apiUrl, headers, body)
+	request, err := utils.SendRequest("POST", apiUrl, headers, []byte(values.Encode()))
 	if err != nil {
 		return "", err
 	}
@@ -58,13 +58,15 @@ func (s *Service) GetAccessTokenByAccount(account, password string) (string, err
 
 func (s *Service) RefreshShareToken(accessToken, uniqueName string) (string, error) {
 
-	// 构建一个切片用于保存键值对的字符串
-	body := []byte("access_token=" + accessToken + "&unique_name=" + uniqueName)
+	values := url.Values{}
+	values.Add("access_token", accessToken)
+	values.Add("unique_name", uniqueName)
+
 	apiUrl := s.BaseUrl + "/token/register"
 	headers := map[string]string{
 		"Content-Type": "application/x-www-form-urlencoded",
 	}
-	request, err := utils.SendRequest("POST", apiUrl, headers, body)
+	request, err := utils.SendRequest("POST", apiUrl, headers, []byte(values.Encode()))
 	if err != nil {
 		return "", err
 	}
