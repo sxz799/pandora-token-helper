@@ -15,7 +15,7 @@ func (s *Service) GetAccessTokenBySessionToken(sessionToken string) (string, err
 
 	values := url.Values{}
 	values.Add("session_token", sessionToken)
-	apiUrl := s.BaseUrl + "/auth/session"
+	apiUrl := s.BaseUrl + "/api/auth/session"
 	headers := map[string]string{
 		"Content-Type": "application/x-www-form-urlencoded",
 	}
@@ -38,7 +38,7 @@ func (s *Service) GetAccessTokenByAccount(account, password string) (string, err
 	values.Add("username", account)
 	values.Add("password", password)
 	// 构建一个切片用于保存键值对的字符串
-	apiUrl := s.BaseUrl + "/auth/login"
+	apiUrl := s.BaseUrl + "/api/auth/login"
 	headers := map[string]string{
 		"Content-Type": "application/x-www-form-urlencoded",
 	}
@@ -62,7 +62,7 @@ func (s *Service) RefreshShareToken(accessToken, uniqueName string) (string, err
 	values.Add("access_token", accessToken)
 	values.Add("unique_name", uniqueName)
 
-	apiUrl := s.BaseUrl + "/token/register"
+	apiUrl := s.BaseUrl + "/api/token/register"
 	headers := map[string]string{
 		"Content-Type": "application/x-www-form-urlencoded",
 	}

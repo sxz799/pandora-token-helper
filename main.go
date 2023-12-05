@@ -5,7 +5,7 @@ import (
 	"pandora-token-helper/services"
 )
 
-func RefreshTokenBySessionToken(baseUrl, sessionToken, uniqueName string) {
+func RefreshShareTokenBySessionToken(baseUrl, sessionToken, uniqueName string) {
 	var s services.Service
 	s.BaseUrl = baseUrl
 	accessToken, err := s.GetAccessTokenBySessionToken(sessionToken)
@@ -20,7 +20,7 @@ func RefreshTokenBySessionToken(baseUrl, sessionToken, uniqueName string) {
 	log.Println(shareToken)
 }
 
-func RefreshTokenByAccount(baseUrl, account, password, uniqueName string) {
+func RefreshShareTokenByAccount(baseUrl, account, password, uniqueName string) {
 	var s services.Service
 	s.BaseUrl = baseUrl
 	accessToken, err := s.GetAccessTokenByAccount(account, password)
@@ -36,10 +36,14 @@ func RefreshTokenByAccount(baseUrl, account, password, uniqueName string) {
 }
 
 func main() {
-	baseUrl := "https://dd.18.1/pr156456"
-	sessionToken := "eyJ"
+	baseUrl := "https://yourip.or.domain:port/<your_proxy_api_prefix>"
 	uniqueName := "12587587"
 
-	RefreshTokenBySessionToken(baseUrl, sessionToken, uniqueName)
-	//RefreshTokenByAccount("", "", "", "")
+
+	sessionToken := "eyJ"
+	RefreshShareTokenBySessionToken(baseUrl, sessionToken, uniqueName)
+
+	account:="your_account"
+	password:="your_password"
+	RefreshShareTokenByAccount(baseUrl, account, password,uniqueName)
 }
